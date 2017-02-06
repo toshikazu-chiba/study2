@@ -17,3 +17,76 @@
 	}
 }
 
+// デバイススイッチ
+@mixin deviceSwitch ($activeDevice, $displayType) {
+	// PC
+	@if ($activeDevice == 'pc') {
+		display: #{$displayType};
+		@include media_query ('screen', 'sp') {
+			display: none;
+		}
+	}
+	// SP
+	@else if ($activeDevice == 'sp') {
+		display: none;
+		@include media_query ('screen', 'sp') {
+			display: #{$displayType};
+		}
+	}
+}
+
+// ボタン
+	// $icon: アイコン有無
+		// true: 有り
+		// false: なし
+	// $iconWidth: アイコンの幅
+		// pxで設定
+	// $position: アイコンとテキストの水平方向の配置
+		// 左揃え: left
+		// 中央揃え: center
+		// アイコンだけ左揃え: icon_left
+	// $direction: アイコン縦並びor横並び
+		// 縦: vertical
+		// 横: inline
+@mixin btn ($icon, $iconWidth, $iconHeight, $position, $direction) {
+	&.common_btn {
+		display: inline-block;
+		vertical-align: top;
+		@if ($icon == 'true') {
+			& > .common_btn_container {
+				@if ($direction == 'inline') {
+					display: flex;
+					@if ($position == 'left') {
+						justify-content: flex-start;
+					}
+					@else if ($position == 'center' or $position == 'icon_left') {
+						justify-content: center;
+					}
+					align-items: center;
+				}
+				@else if ($direction == 'vertical') {
+					display: block;
+				}
+				& > .common_btn_icon {
+					display: block;
+					width: $iconWidth;
+					height: $iconHeight;
+					@if ($direction == 'inline') {
+						flex: 0 0 auto;
+					}
+				}
+				& > .common_btn_text {
+					display: block;
+					@if ($direction == 'inline') {
+						flex: 1 1 auto;
+					}
+					@if ($position == 'icon_left') {
+						padding-left: #{$iconWidth};
+						text-indent: -#{$iconWidth};
+						text-align: center;
+					}
+				}
+			}
+		}
+	}
+}

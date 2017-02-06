@@ -33,8 +33,24 @@ ul, ol, li {
 #header > .inner > .right_content {
   flex: 0 1 auto;
 }
+#header > .inner > .right_content > .sp_menu {
+  max-width: 30px;
+}
+@media screen and (max-width: 768px) {
+  #header > .inner {
+    align-items: center;
+  }
+}
 #header .header_site_title {
   font-size: 18px;
+}
+#header .header_subnav {
+  display: block;
+}
+@media screen and (max-width: 768px) {
+  #header .header_subnav {
+    display: none;
+  }
 }
 #header .header_subnav > ul {
   display: flex;
@@ -55,11 +71,33 @@ ul, ol, li {
   text-align: center;
   font-size: 12px;
 }
+#header .sp_menu {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  #header .sp_menu {
+    display: block;
+  }
+}
+#header .sp_menu > .inner > a {
+  display: block;
+}
+#header .sp_menu > .inner > a > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
 #gnav {
+  display: block;
   padding-top: 5px;
   padding-bottom: 5px;
   background-color: #999999;
+}
+@media screen and (max-width: 768px) {
+  #gnav {
+    display: none;
+  }
 }
 #gnav > .inner > ul {
   display: flex;
@@ -94,6 +132,42 @@ ul, ol, li {
 #footer .footer_copyright {
   color: inherit;
   font-size: 12px;
+}
+
+.sp_menu_content .sp_menu_list > li {
+  display: block;
+}
+.sp_menu_content .sp_menu_list > li + li {
+  border-top: solid 1px #999999;
+}
+.sp_menu_content .sp_menu_list > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.sp_menu_content .sp_menu_list > li > a.common_btn {
+  display: inline-block;
+  vertical-align: top;
+}
+.sp_menu_content .sp_menu_list > li > a.common_btn > .common_btn_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sp_menu_content .sp_menu_list > li > a.common_btn > .common_btn_container > .common_btn_icon {
+  display: block;
+  width: 5px;
+  height: 7px;
+  flex: 0 0 auto;
+}
+.sp_menu_content .sp_menu_list > li > a.common_btn > .common_btn_container > .common_btn_text {
+  display: block;
+  flex: 1 1 auto;
+  padding-left: 5px;
+  text-indent: -5px;
+  text-align: center;
+}
+.sp_menu_content .sp_menu_list > li > a .common_btn_icon {
+  background-image: url(http://placehold.it/5x7);
 }
 
 .document_size {
