@@ -2,63 +2,183 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="common/css/common.css">
 	<link rel="stylesheet" type="text/css" href="common/css/style.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="common/js/common.js"></script>
+	<script type="text/javascript" src="common/js/action.js"></script>
 </head>
 <body ng-controller="mainCtrl">
 	<div id="wrapper">
-		<header id="header" class="document_size">
-			<div class="inner">
-				<div class="left_content">
-					<h1 class="header_site_title">サンプルサイト</h1>
-				</div>
-				<div class="right_content">
-					<div class="header_subnav">
-						<ul>
-							<li><a href="/">サブナビ1</a></li>
-							<li><a href="/">サブナビ2</a></li>
-							<li><a href="/">サブナビ3</a></li>
-							<li><a href="/">サブナビ4</a></li>
-							<li><a href="/">サブナビ5</a></li>
-							<li><a href="/">サブナビ6</a></li>
-						</ul>
+		<div class="inner">
+			<header id="header" class="document_size">
+				<div class="inner">
+					<div class="left_content">
+						<h1 class="header_site_title">サンプルサイト</h1>
 					</div>
-					<div class="sp_menu">
-						<div class="inner">
-							<a href="javascript:void(0);"><img src="http://placehold.it/60x60" alt="menu"></a>
+					<div class="right_content">
+						<div class="header_subnav">
+							<ul>
+								<li><a href="/">サブナビ1</a></li>
+								<li><a href="/">サブナビ2</a></li>
+								<li><a href="/">サブナビ3</a></li>
+								<li><a href="/">サブナビ4</a></li>
+								<li><a href="/">サブナビ5</a></li>
+								<li><a href="/">サブナビ6</a></li>
+							</ul>
+						</div>
+						<div class="sp_menu">
+							<div class="inner">
+								<a href="javascript:void(0);"><img src="http://placehold.it/60x60" alt="menu"></a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</header>
-		<nav id="gnav" class="document_size">
-			<div class="inner">
-				<ul>
-					<li><a href="/">グロナビ1</a></li>
-					<li><a href="/">グロナビ2</a></li>
-					<li><a href="/">グロナビ3</a></li>
-					<li><a href="/">グロナビ4</a></li>
-					<li><a href="/">グロナビ5</a></li>
-					<li><a href="/">グロナビ6</a></li>
-				</ul>
-			</div>
-		</nav>
-		<div id="container" class="document_size" ng-controller="containerCtrl">
-			<div class="inner">
-				<header>
-					<h2 class="common_page_title">サンプルページ</h2>
-				</header>
-				<div class="content">
-					
+			</header>
+			<nav id="gnav" class="document_size">
+				<div class="inner">
+					<ul>
+						<li><a href="/">グロナビ1</a></li>
+						<li><a href="/">グロナビ2</a></li>
+						<li><a href="/">グロナビ3</a></li>
+						<li><a href="/">グロナビ4</a></li>
+						<li><a href="/">グロナビ5</a></li>
+						<li><a href="/">グロナビ6</a></li>
+					</ul>
+				</div>
+			</nav>
+			<div id="container" class="document_size" ng-controller="containerCtrl">
+				<div class="inner">
+					<header>
+						<h2 class="common_page_title">サンプルページ</h2>
+					</header>
+					<div class="content">
+						
+					</div>
 				</div>
 			</div>
+			<footer id="footer" class="document_size" ng-controller="footerCtrl">
+				<div class="inner">
+					<div class="footer_copyright" ng-cloak>©2017 sample site</div>
+				</div>
+			</footer>
 		</div>
-		<footer id="footer" class="document_size" ng-controller="footerCtrl">
-			<div class="inner">
-				<div class="footer_copyright" ng-cloak>©2017 sample site</div>
-			</div>
-		</footer>
+		<div class="sp_menu_content">
+			<nav>
+				<div class="inner">
+					<section>
+						<header>
+							<h2>スマホナビゲーション</h2>
+						</header>
+						<div class="content">
+							<div class="inner">
+								<ul class="sp_menu_list">
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">グロナビ1</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">グロナビ2</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">グロナビ3</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">グロナビ4</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">グロナビ5</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">グロナビ6</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">サブナビ1</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">サブナビ2</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">サブナビ3</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">サブナビ4</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">サブナビ5</span>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/" class="common_btn">
+											<span class="common_btn_container">
+												<i class="common_btn_icon"></i>
+												<span class="common_btn_text">サブナビ6</span>
+											</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+				</div>
+			</nav>
+		</div>
+		<div class="common_overlayar"></div>
 	</div>
 	<div id="common_dynamicContainer">
 		<div class="sp_menu_content">
@@ -175,7 +295,5 @@
 			</nav>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="common/js/common.js"></script>
 </body>
 </html>

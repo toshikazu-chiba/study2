@@ -18,7 +18,7 @@
 }
 
 // デバイススイッチ
-@mixin deviceSwitch ($activeDevice, $displayType) {
+@mixin device_switch ($activeDevice, $displayType) {
 	// PC
 	@if ($activeDevice == 'pc') {
 		display: #{$displayType};
@@ -89,4 +89,16 @@
 			}
 		}
 	}
+}
+
+// スマホ：メニューリスト
+@mixin sp_menu_content ($width) {
+	position: fixed;
+	top: 0;
+	right: -#{$width};
+	z-index: 2;
+	width: $width;
+	height: 100%;
+	background-color: #ffffff;
+	overflow-y: auto;
 }
