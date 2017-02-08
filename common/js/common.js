@@ -1,4 +1,5 @@
-// オーバーレイヤー
+// ============ オーバーレイヤー ============
+// コンストラクタ
 var Overlayer = function (actionType, target) {
 	// アクティブ・非アクティブの設定
 	this.actionType = actionType;
@@ -35,7 +36,8 @@ Overlayer.prototype.close = function () {
 	Overlayer.prototype.activeFlg = false;
 }
 
-// スマホ:スライドメニュー
+// ============ スマホ:スライドメニュー ============
+// コンストラクタ
 var SlideMenu = function (handler) {
 	// イベントハンドラー
 	this.handler = handler;
@@ -51,32 +53,24 @@ SlideMenu.prototype.colseBtn = '.sp_menu_colse_btn';
 SlideMenu.prototype.slideVolume = '-250px';
 // スライドスピード
 SlideMenu.prototype.slideSpeed = 500;
+// オーバーレイヤーを開く
 SlideMenu.prototype.slideMenuOpenOverlayer = new Overlayer('open');
+// オーバーレイヤーを閉じる
 SlideMenu.prototype.slideMenuCloseOverlayer = new Overlayer('close', SlideMenu.prototype.close);
 
 
 SlideMenu.prototype.run = function () {
+	// スライドを開く
 	$(this.handler).on('click', function () {
 		SlideMenu.prototype.open();
 		SlideMenu.prototype.slideMenuOpenOverlayer.run();
 	});
+	// スライドを閉じる
 	$('a', SlideMenu.prototype.colseBtn).on('click', function () {
 		SlideMenu.prototype.close();
 		SlideMenu.prototype.slideMenuCloseOverlayer.run();
 	});
 }
-
-// SlideMenu.prototype.mainProcess = function () {
-// 	// スライドを開く
-// 	if (!SlideMenu.prototype.activeFlg) {
-// 		SlideMenu.prototype.open();
-// 		SlideMenu.prototype.slideMenuOpenOverlayer.run();
-// 	// スライドを閉じる
-// 	} else if (SlideMenu.prototype.activeFlg) {
-// 		SlideMenu.prototype.close();
-// 		SlideMenu.prototype.slideMenuCloseOverlayer.run();
-// 	}
-// }
 
 // スライドを開く
 SlideMenu.prototype.open = function () {
@@ -96,10 +90,11 @@ SlideMenu.prototype.close = function () {
 	SlideMenu.prototype.activeFlg = false;
 }
 
-// サンプル
+// ============ 仕様検証用サンプル ============
+// コンストラクタ
 var Constructor = function (handler, comment) {
-		this.handler = handler;
-		this.comment = comment;
+	this.handler = handler;
+	this.comment = comment;
 }
 
 Constructor.prototype = {
