@@ -152,7 +152,24 @@ html, body, #wrapper {
   display: none;
 }
 
-.sp_menu_content {
+.sp_menu_content > .sp_menu_colse_btn {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.sp_menu_content > .sp_menu_colse_btn > a {
+  display: block;
+  padding: 15px;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: bold;
+}
+.sp_menu_content > .sp_menu_colse_btn.active {
+  display: block;
+}
+.sp_menu_content > .sp_menu_item {
   position: fixed;
   top: 0;
   right: -250px;

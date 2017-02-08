@@ -6,8 +6,13 @@
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="common/css/common.css">
 	<link rel="stylesheet" type="text/css" href="common/css/style.css">
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="common/js/common.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+ -->
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+ 	<script type="text/javascript" src="common/js/common.js"></script>
 	<script type="text/javascript" src="common/js/action.js"></script>
 </head>
 <body ng-controller="mainCtrl">
@@ -66,7 +71,10 @@
 			</footer>
 		</div>
 		<div class="sp_menu_content">
-			<nav>
+			<div class="sp_menu_colse_btn">
+				<a href="javascript: void(0);">×</a>
+			</div>
+			<nav class="sp_menu_item">
 				<div class="inner">
 					<section>
 						<header>
@@ -181,8 +189,8 @@
 		<div class="common_overlayar"></div>
 	</div>
 	<div id="common_dynamicContainer">
-		<div class="sp_menu_content">
-			<nav>
+<!-- 		<div class="sp_menu_content">
+			<nav class="sp_menu_list">
 				<div class="inner">
 					<section>
 						<header>
@@ -293,7 +301,15 @@
 					</section>
 				</div>
 			</nav>
-		</div>
+		</div> -->
 	</div>
+	<script type="text/javascript">
+
+// $(function () {
+$(document).ready(function () {
+	// var slideMenu = new SlideMenu('.sp_menu > .inner > a', '.sp_menu_content', '250px');
+	// $('.sp_menu > .inner > a').on('click', slideMenu.run());
+});
+	</script>
 </body>
 </html>

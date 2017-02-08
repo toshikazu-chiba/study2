@@ -93,12 +93,31 @@
 
 // スマホ：メニューリスト
 @mixin sp_menu_content ($width) {
-	position: fixed;
-	top: 0;
-	right: -#{$width};
-	z-index: 2;
-	width: $width;
-	height: 100%;
-	background-color: #ffffff;
-	overflow-y: auto;
+	& > .sp_menu_colse_btn {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		& > a {
+			display: block;
+			padding: 15px;
+			font-size: $little_large_font_size;
+			color: $white;
+			font-weight: bold;
+		}
+		&.active {
+			display: block;
+		}
+	}
+	& > .sp_menu_item {
+		position: fixed;
+		top: 0;
+		right: -#{$width};
+		z-index: 2;
+		width: $width;
+		height: 100%;
+		background-color: #ffffff;
+		overflow-y: auto;
+	}
 }
