@@ -36,6 +36,7 @@ Overlayer.prototype.close = function () {
 	Overlayer.prototype.activeFlg = false;
 }
 
+
 // ============ スマホ:スライドメニュー ============
 // コンストラクタ
 var SlideMenu = function (handler) {
@@ -45,10 +46,10 @@ var SlideMenu = function (handler) {
 
 // イベントのアクティブ・非アクティブ状態のフラグ
 SlideMenu.prototype.activeFlg = false;
-// スライドメニューのセレクタ
-SlideMenu.prototype.content = '.sp_menu_item';
+// スライドメニューのリスト
+SlideMenu.prototype.contentItem = '.sp_menu_item';
 // 閉じるボタン
-SlideMenu.prototype.colseBtn = '.sp_menu_colse_btn';
+SlideMenu.prototype.closeBtn = '.sp_menu_colse_btn';
 // スライドの移動量
 SlideMenu.prototype.slideVolume = '-250px';
 // スライドスピード
@@ -58,7 +59,6 @@ SlideMenu.prototype.slideMenuOpenOverlayer = new Overlayer('open');
 // オーバーレイヤーを閉じる
 SlideMenu.prototype.slideMenuCloseOverlayer = new Overlayer('close', SlideMenu.prototype.close);
 
-
 SlideMenu.prototype.run = function () {
 	// スライドを開く
 	$(this.handler).on('click', function () {
@@ -66,7 +66,7 @@ SlideMenu.prototype.run = function () {
 		SlideMenu.prototype.slideMenuOpenOverlayer.run();
 	});
 	// スライドを閉じる
-	$('a', SlideMenu.prototype.colseBtn).on('click', function () {
+	$('a', SlideMenu.prototype.closeBtn).on('click', function () {
 		SlideMenu.prototype.close();
 		SlideMenu.prototype.slideMenuCloseOverlayer.run();
 	});
@@ -74,23 +74,24 @@ SlideMenu.prototype.run = function () {
 
 // スライドを開く
 SlideMenu.prototype.open = function () {
-	$(this.content).animate({ 
+	$(this.contentItem).animate({ 
 		right: 0
 	}, SlideMenu.prototype.slideSpeed);
-	$(SlideMenu.prototype.colseBtn).addClass('active');
+	$(SlideMenu.prototype.closeBtn).addClass('active');
 	SlideMenu.prototype.activeFlg = true;
 }
 
 // スライドを閉じる
 SlideMenu.prototype.close = function () {
-	$(this.content).animate({ 
+	$(this.contentItem).animate({ 
 		right: SlideMenu.prototype.slideVolume
 	}, SlideMenu.prototype.slideSpeed);
-	$(SlideMenu.prototype.colseBtn).removeClass('active');
+	$(SlideMenu.prototype.closeBtn).removeClass('active');
 	SlideMenu.prototype.activeFlg = false;
 }
 
-// ============ 仕様検証用サンプル ============
+
+// ============ prototype仕様検証用サンプル ============
 // コンストラクタ
 var Constructor = function (handler, comment) {
 	this.handler = handler;
