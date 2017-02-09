@@ -6,12 +6,7 @@
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="common/css/common.css">
 	<link rel="stylesheet" type="text/css" href="common/css/style.css">
-<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
- -->
-<script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
  	<script type="text/javascript" src="common/js/common.js"></script>
 	<script type="text/javascript" src="common/js/action.js"></script>
 </head>
@@ -36,7 +31,7 @@
 						</div>
 						<div class="sp_menu">
 							<div class="inner">
-								<a href="javascript:void(0);"><img src="http://placehold.it/60x60" alt="menu"></a>
+								<a href="#"><img src="http://placehold.it/60x60" alt="menu"></a>
 							</div>
 						</div>
 					</div>
@@ -60,7 +55,16 @@
 						<h2 class="common_page_title">サンプルページ</h2>
 					</header>
 					<div class="content">
-						
+						<section id="popup_sample">
+							<header>
+								<h2>ポップアップサンプル</h2>
+							</header>
+							<div class="content">
+								<div class="common_popup popup1">
+									<a href="javascript:void(0);" class="common_popup_btn">ポップアップボタン</a>
+								</div>
+							</div>
+						</section>						
 					</div>
 				</div>
 			</div>
@@ -186,122 +190,21 @@
 				</div>
 			</nav>
 		</div>
+		<div class="common_popup_content">
+			<div class="inner">
+				<ul>
+					<li><a href="/">ポップアップメニュー1</a></li>
+					<li><a href="/">ポップアップメニュー2</a></li>
+					<li><a href="/">ポップアップメニュー3</a></li>
+					<li><a href="/">ポップアップメニュー4</a></li>
+					<li><a href="/">ポップアップメニュー5</a></li>
+					<li><a href="/">ポップアップメニュー6</a></li>
+				</ul>
+			</div>
+		</div>
 		<div class="common_overlayar"></div>
 	</div>
 	<div id="common_dynamicContainer">
-<!-- 		<div class="sp_menu_content">
-			<nav class="sp_menu_list">
-				<div class="inner">
-					<section>
-						<header>
-							<h2>スマホナビゲーション</h2>
-						</header>
-						<div class="content">
-							<div class="inner">
-								<ul class="sp_menu_list">
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">グロナビ1</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">グロナビ2</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">グロナビ3</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">グロナビ4</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">グロナビ5</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">グロナビ6</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">サブナビ1</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">サブナビ2</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">サブナビ3</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">サブナビ4</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">サブナビ5</span>
-											</span>
-										</a>
-									</li>
-									<li>
-										<a href="/" class="common_btn">
-											<span class="common_btn_container">
-												<i class="common_btn_icon"></i>
-												<span class="common_btn_text">サブナビ6</span>
-											</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-				</div>
-			</nav>
-		</div> -->
 	</div>
 </body>
 </html>

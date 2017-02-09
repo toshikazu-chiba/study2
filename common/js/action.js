@@ -1,7 +1,11 @@
 
 $(function () {
-	var slideMenu = new SlideMenu('.sp_menu a');
+	var slideMenu = new SlideMenu();
 	slideMenu.run();
+});
+$(function () {
+	var popupMenu = new PopupMenu();
+	popupMenu.run();
 });
 
 $(function () {
@@ -10,10 +14,12 @@ $(function () {
 	var constructor3 = new Constructor('.test3', 'hello3');
 	var constructor4 = new Constructor('.test4', 'hello4');
 	var constructor5 = new Constructor('.test5', 'hello5');
+	var constructor6 = new Constructor('.test6', 'hello6');
 
 	constructor1.test1();
 	constructor2.test2();
 	constructor3.test3();
 	constructor4.test4();
 	constructor5.test5();
+	constructor6.test6();
 });
