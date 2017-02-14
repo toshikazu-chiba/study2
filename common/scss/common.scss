@@ -4,12 +4,14 @@
 
 html, body, #wrapper {
 	height: 100%;
-	overflow-x: hidden;
+	@include media_query ('screen', 'sp') {
+		overflow-x: hidden;
+	}
 }
 
 #wrapper {
 	position: relative;
-	z-index: 0;
+	z-index: $base_z_index;
 }
 
 // ヘッダー
@@ -106,7 +108,6 @@ html, body, #wrapper {
 
 #container {
 	& > .inner {
-		height: 5000px;
 	}
 }
 
@@ -167,11 +168,17 @@ html, body, #wrapper {
 	}
 }
 
+@include common_popup ($base_color);
+
 // サイト幅
 .document_size {
 	box-sizing: border-box;
 	@if $requid_key == false {
 		min-width: $document_width;
+		@include media_query ('screen', 'sp') {
+			min-width: auto;
+			min-width: initial;
+		}
 	}
 	& > .inner {
 		max-width: $document_width;
@@ -186,7 +193,7 @@ html, body, #wrapper {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 1;
+	z-index: $z_index_lv2;
 	height: 100%;
 	width: 100%;
 	background: rgba(0,0,0,0.7);

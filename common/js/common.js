@@ -4,8 +4,8 @@ var Config = function () {}
 // Config.prototype.scrollX = window.pageXOffset
 
 // 画面のスクロール量
-Config.prototype.scrollX = window.pageXOffset
-Config.prototype.scrollY = window.pageXOffset
+// Config.prototype.scrollX = $(window).scrollLeft();
+// Config.prototype.scrollY = $(window).scrollTop();
 
 // 画面の幅と高さ
 Config.prototype.documentWidth = $(window).width();
@@ -56,88 +56,31 @@ Overlayer.prototype.close = function () {
 }
 
 // ============ ポップアップメニュー ============
-/* 機能
-	・画面上のイベントハンドラの位置によってポップアップの配置が変わる
-	　配置の調整タイミング
-	　 ・イベントハンドラをクリックしたとき
-	　 ・画面をスクロールしたとき
-	　　　・配置の仕様
-		※ポップアップの配置が切り替わるタイミング
-		　　・矢印が出ている側の反対の面の場合：
-		　　　→ポップアップ本体（矢印含む）の上下左右端が、画面の端から「limitMargin」で設定された余白に設置する場合
-		　　・矢印が出ている側の垂直方向の場合：
-			（1）上下に矢印が出ている場合
-			　→イベントハンドラの中央から、上下それぞれに「limitMargin」「limitArrow」「矢印の高さ/2」の領域に、画面端が接したら位置を切り替える
-			（2）左右に矢印が出ている場合
-			　→イベントハンドラの中央から、左右それぞれに「limitMargin」「limitArrow」「矢印の幅/2」の領域に、画面端が接したら位置を切り替える
-		　　●イベントハンドラが画面中央： 
-			ポップアップ： イベントハンドラの右側
-			ポップアップの矢印： イベントハンドラの天地中央
-		　　●イベントハンドラが画面上部：
-			・左右中央
-			　・ポップアップ： イベントハンドラの下側
-			　・ポップアップの矢印： イベントハンドラの左右中央
-			・左上
-			　→（1）（2）どちらにも該当する場合
-			　　・ポップアップ： イベントハンドラの右側
-			　　・ポップアップの矢印： イベントハンドラの天地中央
-			・右上
-			　→（1）（2）どちらにも該当する場合
-			　　・ポップアップ： イベントハンドラの左側
-			　　・ポップアップの矢印： イベントハンドラの天地中央
-		　　●イベントハンドラが画面天地中央：
-			・左右中央
-			　・ポップアップ： イベントハンドラの右側
-			　・ポップアップの矢印： イベントハンドラの天地中央
-			・左
-			　・ポップアップ： イベントハンドラの右側
-			　・ポップアップの矢印： イベントハンドラの天地中央
-			・右
-			　・ポップアップの右側面が画面右側面の領域に設置するまで
-			　　・ポップアップ： イベントハンドラの右側
-			　　・ポップアップの矢印： イベントハンドラの天地中央
-			　・ポップアップの右側面が画面右側面の領域に設置した場合
-			　　・ポップアップ： イベントハンドラの右側
-			　　・ポップアップの矢印： イベントハンドラの天地中央
-		　　●イベントハンドラが画面下部：
-			・左右中央
-			　・ポップアップ： イベントハンドラの右側
-			　・ポップアップの矢印： イベントハンドラの天地中央
-			・左下
-			　→（1）（2）どちらにも該当する場合
-			　　・ポップアップ： イベントハンドラの右側
-			　　・ポップアップの矢印： イベントハンドラの天地中央
-			・右下
-			　→（1）（2）どちらにも該当する場合
-			　　・ポップアップ： イベントハンドラの右側
-			　　・ポップアップの矢印： イベントハンドラの天地中央
-	// ・
-	// ・
-	// ・
-*/ 
+
 // コンストラクタ
 var PopupMenu = function () {}
 
 // イベントのアクティブ・非アクティブ状態のフラグ
 PopupMenu.prototype.actionFlg = false;
-// ポップアップメニューのリスト
+// 共通設定
 PopupMenu.prototype.config =  new Config();
-// ポップアップメニューのリスト
-PopupMenu.prototype.handler = '.common_popup';
+// ポップアップメニューのイベントハンドラー
+PopupMenu.prototype.handler = '.common_popup_btn';
 // ポップアップメニューのリスト
 PopupMenu.prototype.content = '.common_popup_content';
+// ポップアップメニューの矢印
+PopupMenu.prototype.contentArrow = '.common_popup_tri';
 // ポップアップと画面の上下左右の最低余白量
-PopupMenu.prototype.limitMargin = '10px';
+PopupMenu.prototype.limitMargin = 10;
 // ポップアップ自身に対するポップアップの矢印の位置限界
-PopupMenu.prototype.limitArrow = '10px';
+PopupMenu.prototype.limitArrow = 10;
 // ポップアップとイベントハンドラの間の間隔
-PopupMenu.prototype.popupMargin = '3px';
+PopupMenu.prototype.popupMargin = 3;
 
 PopupMenu.prototype.init = function () {
 	PopupMenu.prototype.setContent();
 	PopupMenu.prototype.getPosition();
 }
-
 PopupMenu.prototype.setContent = function () {
 	// return $.alax({
 	// 	type: "post",
@@ -146,25 +89,153 @@ PopupMenu.prototype.setContent = function () {
 
 	// });
 }
-
-
 PopupMenu.prototype.getPosition = function () {
 	// イベントハンドラとなる要素の位置からポップアップの出現位置を決める
-		// イベントハンドラの幅と高さを取得
-		var handlerSize = {
-			'width': $(PopupMenu.prototype.handler).width(),
-			'height': $(PopupMenu.prototype.handler).height()
+	// イベントハンドラの幅と高さを取得
+	var handlerSize = {
+		'width': $(PopupMenu.prototype.handler).width(),
+		'height': $(PopupMenu.prototype.handler).height()
+	}
+	// ポップアップの本体の幅と高さ
+	var contentSize = {
+		'width': $(PopupMenu.prototype.content).width(),
+		'height': $(PopupMenu.prototype.content).height()
+	}
+	// 矢印の幅と高さを取得
+	var arrowSize = {
+		width: $(PopupMenu.prototype.contentArrow).width(),
+		height: $(PopupMenu.prototype.contentArrow).height()
+	}
+	// イベントハンドラの上下左右の位置を取得
+	var position = $(PopupMenu.prototype.handler).offset();
+	var handlerPosition = {
+		'top': position.top,																		// 上
+		'right': PopupMenu.prototype.config.documentWidth - (handlerSize.width + position.left),	// 右
+		'bottom': PopupMenu.prototype.config.documentHeight - (handlerSize.height + position.top),	// 下
+		'left': position.left																		// 左
+	}
+	var setFrame = function (arrowDirection) {
+		var arrowPosition = '-' + arrowSize.width + 'px';
+
+		switch (arrowDirection) {
+			case 'top': 
+				$(PopupMenu.prototype.contentArrow).css(
+					{
+						'top': arrowPosition,
+						'left': PopupMenu.prototype.limitArrow
+					}
+				);
+				break;
+			case 'right': 
+				$(PopupMenu.prototype.contentArrow).css(
+					{
+						'right': arrowPosition,
+						'top': PopupMenu.prototype.limitArrow
+					}
+				);
+				break;
+			case 'bottom':
+				$(PopupMenu.prototype.contentArrow).css(
+					{
+						'bottom': arrowPosition,
+						'left': PopupMenu.prototype.limitArrow
+					}
+				);
+				break;
+			case 'left':
+				$(PopupMenu.prototype.contentArrow).css(
+					{
+						'left': arrowPosition,
+						'top': PopupMenu.prototype.limitArrow
+					}
+				);
+				break;
 		}
-		// イベントハンドラの上下左右の位置を取得
-		var position = $(PopupMenu.prototype.handler).offset();
-		var handlerPosition = {
-			'top': position.top,																		// 上
-			'right': PopupMenu.prototype.config.documentWidth - (handlerSize.width + position.left),	// 右
-			'bottom': PopupMenu.prototype.config.documentHeight - (handlerSize.height + position.top),	// 下
-			'left': position.left																		// 左
-		};
-		// 画面中央 
-			// → popupを要素の右に出す
+
+	}
+
+	//●イベントハンドラが画面上部：
+	if ( (handlerPosition.top + handlerSize.height/2) - $(window).scrollTop() < PopupMenu.prototype.limitMargin + arrowSize.height/2) {
+
+		//・左上
+		//　→（1）（2）どちらにも該当する場合
+		//　　・ポップアップ： イベントハンドラの右側
+		//　　・ポップアップの矢印： イベントハンドラの天地中央
+		if ( (handlerPosition.left + handlerSize.width/2) - $(window).scrollLeft() < PopupMenu.prototype.limitMargin + arrowSize.width/2) {
+			console.log('topleft');
+			setFrame('left');
+
+		//・左右中央
+		//　・ポップアップ： イベントハンドラの下側
+		//　・ポップアップの矢印： イベントハンドラの左右中央
+		} else if ( (handlerPosition.left + handlerSize.width/2) - $(window).scrollLeft() >= PopupMenu.prototype.limitMargin + arrowSize.width/2 && handlerPosition.right + handlerSize.width/2 >= PopupMenu.prototype.limitMargin + arrowSize.width/2) {
+			console.log('topmiddle');
+			setFrame('bottom');
+
+		//・右上
+		//　→（1）（2）どちらにも該当する場合
+		//　　・ポップアップ： イベントハンドラの左側
+		//　　・ポップアップの矢印： イベントハンドラの天地中央
+		} else if ( (handlerPosition.right + handlerSize.width/2) - $(window).scrollLeft() < PopupMenu.prototype.limitMargin + arrowSize.width/2) {
+			console.log('topright');
+			setFrame('left');
+
+		}
+
+	//●イベントハンドラが画面天地中央：
+	} else if ( (handlerPosition.top + handlerSize.height/2) - $(window).scrollTop() >= PopupMenu.prototype.limitMargin + arrowSize.height/2 && handlerPosition.bottom + handlerSize.height/2 >= PopupMenu.prototype.limitMargin + arrowSize.height/2) {
+
+		//・左
+		//　・ポップアップ： イベントハンドラの右側
+		//　・ポップアップの矢印： イベントハンドラの天地中央
+		if ( (handlerPosition.left + handlerSize.width) - $(window).scrollLeft() < PopupMenu.prototype.limitMargin + arrowSize.width) {
+			console.log('middleleft');
+			setFrame('right');
+
+		//・左右中央
+		//　・ポップアップ： イベントハンドラの右側
+		//　・ポップアップの矢印： イベントハンドラの天地中央
+		} else if ( (handlerPosition.left + handlerSize.width) - $(window).scrollLeft() >= PopupMenu.prototype.limitMargin + arrowSize.width && handlerPosition.right >= PopupMenu.prototype.limitMargin + contentSize.width + arrowSize.width) {
+			console.log('middlemiddle');
+			setFrame('right');
+
+		//・右
+		//　・ポップアップの右側面が画面右側面の領域に設置した場合
+		//　　・ポップアップ： イベントハンドラの左側
+		//　　・ポップアップの矢印： イベントハンドラの天地中央
+		} else if ( (handlerPosition.right) - $(window).scrollLeft() < PopupMenu.prototype.limitMargin + contentSize.width + arrowSize.width) {
+			console.log('middleright');
+			setFrame('left');
+		}
+
+	//●イベントハンドラが画面下部：
+	} else if ( (handlerPosition.bottom + handlerSize.height/2) - $(window).scrollTop() < PopupMenu.prototype.limitMargin + arrowSize.height/2) {
+
+		//・左下
+		//　→（1）（2）どちらにも該当する場合
+		//　　・ポップアップ： イベントハンドラの右側
+		//　　・ポップアップの矢印： イベントハンドラの天地中央
+		if ( (handlerPosition.left + handlerSize.width/2) - $(window).scrollLeft() < PopupMenu.prototype.limitMargin + arrowSize.width/2) {
+			console.log('bottomleft');
+			setFrame('bottom');
+
+		//・左右中央
+		//　・ポップアップ： イベントハンドラの右側
+		//　・ポップアップの矢印： イベントハンドラの天地中央
+		} else if ( (handlerPosition.left + handlerSize.width/2) - $(window).scrollLeft() >= PopupMenu.prototype.limitMargin + arrowSize.width/2 && handlerPosition.right + handlerSize.width/2 >= PopupMenu.prototype.limitMargin + arrowSize.width/2) {
+			console.log('bottommiddle');
+			setFrame('bottom');
+
+		//・右下
+		//　→（1）（2）どちらにも該当する場合
+		//　　・ポップアップ： イベントハンドラの右側
+		//　　・ポップアップの矢印： イベントハンドラの天地中央
+		} else if ( (handlerPosition.right + handlerSize.width/2) - $(window).scrollLeft() < PopupMenu.prototype.limitMargin + arrowSize.width/2) {
+			console.log('bottomright');
+			setFrame('bottom');
+
+		}
+	}
 }
 
 PopupMenu.prototype.run = function () {
@@ -202,7 +273,7 @@ SlideMenu.prototype.activeFlg = false;
 // スライドメニューのリスト
 SlideMenu.prototype.contentItem = '.sp_menu_item';
 // 閉じるボタン
-SlideMenu.prototype.closeBtn = '.sp_menu_colse_btn';
+SlideMenu.prototype.closeBtn = '.sp_menu_close_btn';
 // スライドの移動量
 SlideMenu.prototype.slideVolume = '-250px';
 // スライドスピード

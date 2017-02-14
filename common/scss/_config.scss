@@ -1,18 +1,29 @@
 @charset "utf-8";
-// ディレクトリパス間r年
+// ========= ディレクトリパス関連 =========
 // 画像パス
 $imgPath: 'placehold.it/';
 
-// ドキュメント関連
+// ========= ドキュメント関連 =========
+// ドキュメントサイズ
 // pc
 $document_width: 1024px;
 // スマホ
 $sp_document_width: 768px;
 
-// サイト幅固定 or リキッド
+// z-index管理
+$z_index_counter: 1;
+// デフォルト
+$base_z_index: 0;
+// オーバーレイヤー
+$z_index_lv2: $base_z_index + $z_index_counter;
+// その他オーバーレイヤーの上に表示されるＵＩ系用
+$z_index_lv3: $z_index_lv2 + $z_index_counter;
+
+// ========= サイト幅固定 or リキッド =========
 // true: リキッド
 // false: 固定
-$requid_key: true;
+// $requid_key: true;
+$requid_key: false;
 
 // 色
 $base_color: #333333;

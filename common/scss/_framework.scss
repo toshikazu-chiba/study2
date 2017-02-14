@@ -35,6 +35,33 @@
 	}
 }
 
+// 三角形作成
+	// direction:
+		// top: 上向き
+		// right: 右向き
+		// bottom: 下向き
+		// left: 左向き
+@mixin tri ($width, $height, $color, $direction) {
+	display: block;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: transparent transparent $color transparent;
+	border-width: 0 $width/2 $height $width/2;
+	@if ($direction == 'top') {
+		transform: rotate(0);
+	}
+	@elseif ($direction == 'right') {
+		transform: rotate(90deg);
+	}
+	@elseif ($direction == 'bottom') {
+		transform: rotate(180deg);
+	}
+	@elseif ($direction == 'left') {
+		transform: rotate(270deg);
+	}
+}
+
 // ボタン
 	// $icon: アイコン有無
 		// true: 有り
@@ -90,18 +117,52 @@
 		}
 	}
 }
+// ポップアップメニュー
+@mixin common_popup ($borderColor) {
+	.common_popup {
+		&.common_popup_btn {
+			display: inline-block;
+			vertical-align: top;
+			& > a {
+				display: block;
+			 }
+		}
+		&.common_popup_content {
+			position: absolute;
+			z-index: $z_index_lv3;
+			& > .inner {
+				position: relative;
+				z-index: $base_z_index;
+				padding: 10px;
+				border-radius: 10px;
+				border: solid 1px $borderColor;
+				& > .common_popup_tri {
+					position: absolute;
+					z-index: $z_index_lv2;
+					width: 9px;
+					height: 18px;
+					& > .tri {
+						fill: $white;
+						stroke: $base_color;
+						d: path('M 0 0 L 8 8 L 0 16');
+					}
+				}
+			}
+		}
+	}
+}
 
 // スマホ：メニューリスト
 @mixin sp_menu_content ($width) {
-	& > .sp_menu_colse_btn {
+	& > .sp_menu_close_btn {
 		display: none;
 		position: fixed;
 		top: 0;
 		left: 0;
-		z-index: 2;
+		z-index: $z_index_lv3;
 		& > a {
 			display: block;
-			padding: 15px;
+			padding: 13px 15px;
 			font-size: $little_large_font_size;
 			color: $white;
 			font-weight: bold;
@@ -114,7 +175,7 @@
 		position: fixed;
 		top: 0;
 		right: -#{$width};
-		z-index: 2;
+		z-index: $z_index_lv3;
 		width: $width;
 		height: 100%;
 		background-color: #ffffff;

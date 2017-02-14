@@ -11,7 +11,7 @@ p, a {
 a {
   text-decoration: none;
   color: #333333;
-  line-height: 1em;
+  line-height: 1.2em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -24,7 +24,11 @@ ul, ol, li {
 
 html, body, #wrapper {
   height: 100%;
-  overflow-x: hidden;
+}
+@media screen and (max-width: 768px) {
+  html, body, #wrapper {
+    overflow-x: hidden;
+  }
 }
 
 #wrapper {
@@ -129,10 +133,6 @@ html, body, #wrapper {
   color: #ffffff;
 }
 
-#container > .inner {
-  height: 5000px;
-}
-
 #footer {
   background-color: #000000;
   color: #ffffff;
@@ -152,21 +152,21 @@ html, body, #wrapper {
   display: none;
 }
 
-.sp_menu_content > .sp_menu_colse_btn {
+.sp_menu_content > .sp_menu_close_btn {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 2;
 }
-.sp_menu_content > .sp_menu_colse_btn > a {
+.sp_menu_content > .sp_menu_close_btn > a {
   display: block;
-  padding: 15px;
+  padding: 13px 15px;
   font-size: 16px;
   color: #ffffff;
   font-weight: bold;
 }
-.sp_menu_content > .sp_menu_colse_btn.active {
+.sp_menu_content > .sp_menu_close_btn.active {
   display: block;
 }
 .sp_menu_content > .sp_menu_item {
@@ -217,8 +217,45 @@ html, body, #wrapper {
   margin-left: 5px;
 }
 
+.common_popup.common_popup_btn {
+  display: inline-block;
+  vertical-align: top;
+}
+.common_popup.common_popup_btn > a {
+  display: block;
+}
+.common_popup.common_popup_content {
+  position: absolute;
+  z-index: 2;
+}
+.common_popup.common_popup_content > .inner {
+  position: relative;
+  z-index: 0;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 1px #333333;
+}
+.common_popup.common_popup_content > .inner > .common_popup_tri {
+  position: absolute;
+  z-index: 1;
+  width: 9px;
+  height: 18px;
+}
+.common_popup.common_popup_content > .inner > .common_popup_tri > .tri {
+  fill: #ffffff;
+  stroke: #333333;
+  d: path("M 0 0 L 8 8 L 0 16");
+}
+
 .document_size {
   box-sizing: border-box;
+  min-width: 1024px;
+}
+@media screen and (max-width: 768px) {
+  .document_size {
+    min-width: auto;
+    min-width: initial;
+  }
 }
 .document_size > .inner {
   max-width: 1024px;
