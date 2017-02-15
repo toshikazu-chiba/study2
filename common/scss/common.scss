@@ -4,6 +4,9 @@
 
 html, body, #wrapper {
 	height: 100%;
+	@if $requid_key == true {
+		overflow-x: hidden;
+	}
 	@include media_query ('screen', 'sp') {
 		overflow-x: hidden;
 	}

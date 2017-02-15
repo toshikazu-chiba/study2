@@ -128,25 +128,47 @@
 			 }
 		}
 		&.common_popup_content {
+			display: none;
 			position: absolute;
+			left: 300px;
 			z-index: $z_index_lv3;
+			background-color: $white;
 			& > .inner {
 				position: relative;
 				z-index: $base_z_index;
-				padding: 10px;
-				border-radius: 10px;
-				border: solid 1px $borderColor;
 				& > .common_popup_tri {
 					position: absolute;
+					top: 0;
+					left: 0;
 					z-index: $z_index_lv2;
-					width: 9px;
-					height: 18px;
+					width: 8px;
+					height: 16px;
+					&.rotate_class {
+						&_top {
+							transform-origin: left bottom;
+						}
+						&_left {
+
+						}
+						&_bottom {
+							transform-origin: left top;
+						}
+					}
 					& > .tri {
 						fill: $white;
 						stroke: $base_color;
+						stroke-width: 1.01px;
 						d: path('M 0 0 L 8 8 L 0 16');
 					}
 				}
+				& > .common_popup_content_container {
+					padding: 10px;
+					border-radius: 10px;
+					border: solid 1px $borderColor;
+				}
+			}
+			&.active {
+				display: block;
 			}
 		}
 	}
