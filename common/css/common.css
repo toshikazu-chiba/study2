@@ -134,6 +134,10 @@ html, body, #wrapper {
   color: #ffffff;
 }
 
+#container > .inner {
+  height: 3000px;
+}
+
 #footer {
   background-color: #000000;
   color: #ffffff;

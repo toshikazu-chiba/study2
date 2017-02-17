@@ -109,10 +109,8 @@ PopupMenu.prototype.getPosition = function () {
 	// イベントハンドラの上下左右の位置を取得
 	var position = $(PopupMenu.prototype.handler).offset();
 	var handlerPosition = {
-		'top': position.top,																		// 上
-		'right': PopupMenu.prototype.config.documentWidth - (handlerSize.width + position.left),	// 右
-		'bottom': PopupMenu.prototype.config.documentHeight - (handlerSize.height + position.top),	// 下
-		'left': position.left,																		// 左
+		'top': position.top,	// 上
+		'left': position.left,	// 左
 	}
 	// イベントハンドラの水平/垂直方向の中心までの座標
 	var handlerPositionCenter = {
@@ -121,22 +119,10 @@ PopupMenu.prototype.getPosition = function () {
 	}
 	// 
 	var arrowPositionCenter = {
-		'vertical': PopupMenu.prototype.limitArrow + PopupMenu.prototype.limitMargin + arrowSize.height/2,
-		'horizontal': PopupMenu.prototype.limitArrow + PopupMenu.prototype.limitMargin + arrowSize.width/2,
+		'vertical': PopupMenu.prototype.limitArrow + arrowSize.height/2,
+		'horizontal': PopupMenu.prototype.limitArrow + arrowSize.height/2,
 	}
-	var setFrame = function (arrowDirection, arrowPositionType) {
-		var arrowPosition;
-		if (arrowPositionType == 'limited') {
-			arrowPosition = {
-				'top': PopupMenu.prototype.limitArrow + 'px',
-				'left': PopupMenu.prototype.limitArrow + 'px',
-			};
-		} else if (arrowPositionType == 'move') {
-			arrowPosition = {
-				'top': contentSize.height - ( PopupMenu.prototype.config.documentHeight - handlerPositionCenter.vertical + arrowSize.height/2 ) + 'px',
-				'left': contentSize.width - ( PopupMenu.prototype.config.documentWidth - handlerPositionCenter.horizontal + arrowSize.width/2 ) + 'px',
-			};
-		}
+	var setFrame = function (arrowDirection) {
 		$(PopupMenu.prototype.content).css('width', contentSize.width);
 		switch (arrowDirection) {
 			case 'top': 
@@ -145,7 +131,7 @@ PopupMenu.prototype.getPosition = function () {
 						'top': 'auto',
 						'right': 'auto',
 						'bottom': '1px',
-						'left': arrowPosition.left,
+						'left': PopupMenu.prototype.limitArrow + 'px',
 						'transform': 'rotate(' + 90 + 'deg)',
 					}
 				).addClass('rotate_class_top');
@@ -154,14 +140,14 @@ PopupMenu.prototype.getPosition = function () {
 						'top': handlerPosition.top - (contentSize.height + PopupMenu.prototype.popupMargin + arrowSize.width) + 'px',
 						'right': 'auto',
 						'bottom': 'auto',
-						'left': handlerPositionCenter.horizontal - (PopupMenu.prototype.limitArrow + arrowSize.width) + 'px',
+						'left': handlerPositionCenter.horizontal - (arrowSize.height/2 + PopupMenu.prototype.limitArrow) + 'px',
 					}
 				);
 				break;
 			case 'right': 
 				$(PopupMenu.prototype.contentArrow).css(
 					{
-						'top': arrowPosition.top,
+						'top': PopupMenu.prototype.limitArrow + 'px',
 						'right': 'auto',
 						'bottom': 'auto',
 						'left': '-' + (arrowSize.width - 1) + 'px',
@@ -170,10 +156,10 @@ PopupMenu.prototype.getPosition = function () {
 				);
 				$(PopupMenu.prototype.content).css(
 					{
-						'top': handlerPositionCenter.vertical - (PopupMenu.prototype.limitArrow + arrowSize.width) + 'px',
+						'top': handlerPositionCenter.vertical - (arrowSize.height/2 + PopupMenu.prototype.limitArrow) + 'px',
 						'right': 'auto',
 						'bottom': 'auto',
-						'left': handlerPosition.left + handlerSize.width + (PopupMenu.prototype.popupMargin + arrowSize.width) + 'px',
+						'left': (handlerPosition.left + handlerSize.width) + (PopupMenu.prototype.popupMargin + arrowSize.width) + 'px',
 					}
 				);
 				break;
@@ -183,7 +169,7 @@ PopupMenu.prototype.getPosition = function () {
 						'top': '1px',
 						'right': 'auto',
 						'bottom': 'auto',
-						'left': arrowPosition.left,
+						'left': PopupMenu.prototype.limitArrow + 'px',
 						'transform': 'rotate(' + 270 + 'deg)'
 					}
 				).addClass('rotate_class_bottom');
@@ -192,14 +178,14 @@ PopupMenu.prototype.getPosition = function () {
 						'top': (handlerPosition.top + handlerSize.height) + (PopupMenu.prototype.popupMargin + arrowSize.width) + 'px',
 						'right': 'auto',
 						'bottom': 'auto',
-						'left': handlerPositionCenter.horizontal - (PopupMenu.prototype.limitArrow + arrowSize.width) + 'px',
+						'left': handlerPositionCenter.horizontal - (arrowSize.height/2 + PopupMenu.prototype.limitArrow) + 'px',
 					}
 				);
 				break;
 			case 'left':
 				$(PopupMenu.prototype.contentArrow).css(
 					{
-						'top': arrowPosition.top,
+						'top': PopupMenu.prototype.limitArrow + 'px',
 						'right': '-' + (arrowSize.width - 1) + 'px',
 						'bottom': 'auto',
 						'left': 'auto',
@@ -207,10 +193,91 @@ PopupMenu.prototype.getPosition = function () {
 				);
 				$(PopupMenu.prototype.content).css(
 					{
-						'top': handlerPositionCenter.vertical - (PopupMenu.prototype.limitArrow + arrowSize.width) + 'px',
+						'top': handlerPositionCenter.vertical - (arrowSize.height/2 + PopupMenu.prototype.limitArrow) + 'px',
 						'right': 'auto',
 						'bottom': 'auto',
-						'left': handlerPosition.left - (contentSize.width + PopupMenu.prototype.popupMargin + arrowSize.width) + 'px',
+						'left': handlerPosition.left - (PopupMenu.prototype.popupMargin + arrowSize.width + contentSize.width) + 'px',
+					}
+				);
+				break;
+
+
+			// ポップアップが画面の下面に設置(ポップアップが上側にある状態)
+			case 'touchrightTop': 
+				$(PopupMenu.prototype.contentArrow).css(
+					{
+						'top': 'auto',
+						'right': 'auto',
+						'bottom': '1px',
+						'left': contentSize.width + PopupMenu.prototype.limitMargin - ( PopupMenu.prototype.config.documentWidth - (handlerPositionCenter.horizontal - arrowSize.height/2) ) + 'px',
+						'transform': 'rotate(' + 90 + 'deg)',
+					}
+				).addClass('rotate_class_top');
+				$(PopupMenu.prototype.content).css(
+					{
+						'top': handlerPosition.top - (contentSize.height + PopupMenu.prototype.popupMargin + arrowSize.width) + 'px',
+						'right': 'auto',
+						'bottom': 'auto',
+						'left': PopupMenu.prototype.config.documentWidth - (contentSize.width + PopupMenu.prototype.limitMargin) + 'px',
+					}
+				);
+				break;
+			// ポップアップが画面の下面に設置(ポップアップが右側にある状態)
+			case 'touchbottomRight':
+				$(PopupMenu.prototype.contentArrow).css(
+					{
+						'top': contentSize.height + PopupMenu.prototype.limitMargin - ( PopupMenu.prototype.config.documentHeight - (handlerPositionCenter.vertical - arrowSize.height/2) ) + 'px',
+						'right': 'auto',
+						'bottom': 'auto',
+						'left': '-' + (arrowSize.width - 1) + 'px',
+						'transform': 'rotate(' + 180 + 'deg)'
+					}
+				);
+				$(PopupMenu.prototype.content).css(
+					{
+						'top': PopupMenu.prototype.config.documentHeight - (contentSize.height + PopupMenu.prototype.limitMargin) + 'px',
+						'right': 'auto',
+						'bottom': 'auto',
+						'left': (handlerPosition.left + handlerSize.width) + (PopupMenu.prototype.popupMargin + arrowSize.width) + 'px',
+					}
+				);
+				break;
+			// ポップアップが画面の右面に設置(ポップアップが下側にある状態)
+			case 'touchrightBottom':
+				$(PopupMenu.prototype.contentArrow).css(
+					{
+						'top': '1px',
+						'right': 'auto',
+						'bottom': 'auto',
+						'left': contentSize.width + PopupMenu.prototype.limitMargin - ( PopupMenu.prototype.config.documentWidth - (handlerPositionCenter.horizontal - arrowSize.height/2) ) + 'px',
+						'transform': 'rotate(' + 270 + 'deg)'
+					}
+				).addClass('rotate_class_bottom');
+				$(PopupMenu.prototype.content).css(
+					{
+						'top': (handlerPosition.top + handlerSize.height) + (PopupMenu.prototype.popupMargin + arrowSize.width) + 'px',
+						'right': 'auto',
+						'bottom': 'auto',
+						'left': PopupMenu.prototype.config.documentWidth - (contentSize.width + PopupMenu.prototype.limitMargin) + 'px',
+					}
+				);
+				break;
+			// ポップアップが画面の下面に設置(ポップアップが右側にある状態)
+			case 'touchbottomLeft':
+				$(PopupMenu.prototype.contentArrow).css(
+					{
+						'top': contentSize.height + PopupMenu.prototype.limitMargin - ( PopupMenu.prototype.config.documentHeight - (handlerPositionCenter.vertical - arrowSize.height/2) ) + 'px',
+						'right': '-' + (arrowSize.width - 1) + 'px',
+						'bottom': 'auto',
+						'left': 'auto',
+					}
+				);
+				$(PopupMenu.prototype.content).css(
+					{
+						'top': PopupMenu.prototype.config.documentHeight - (contentSize.height + PopupMenu.prototype.limitMargin) + 'px',
+						'right': 'auto',
+						'bottom': 'auto',
+						'left': handlerPosition.left - (PopupMenu.prototype.popupMargin + arrowSize.width + contentSize.width) + 'px',
 					}
 				);
 				break;
@@ -223,40 +290,60 @@ PopupMenu.prototype.getPosition = function () {
 		//・左上
 		if ( handlerPositionCenter.horizontal - $(window).scrollLeft() < arrowPositionCenter.horizontal) {
 			console.log('topleft');
-			setFrame('bottom', 'limited');
+			setFrame('bottom');
 
 		//・左右中央
 		} else if ( handlerPositionCenter.horizontal - $(window).scrollLeft() >= arrowPositionCenter.horizontal && handlerPositionCenter.horizontal - $(window).scrollLeft() <= PopupMenu.prototype.config.documentWidth - (contentSize.width - arrowPositionCenter.horizontal)) {
 			console.log('topmiddle');
-			setFrame('bottom', 'limited');
+			setFrame('bottom');
 
-		} else if ( handlerPositionCenter.horizontal - $(window).scrollLeft() > PopupMenu.prototype.config.documentWidth - (contentSize.width - arrowPositionCenter.horizontal) && handlerPositionCenter.horizontal - $(window).scrollLeft() <= PopupMenu.prototype.config.documentWidth - (arrowPositionCenter.horizontal)) {
-			console.log('right: arrow move');
-			setFrame('bottom', 'move');
+		// ポップアップの右側面がlimitMarginで設定した余白の範囲に設置
+		} else if ( handlerPositionCenter.horizontal - $(window).scrollLeft() > PopupMenu.prototype.config.documentWidth - (contentSize.width - arrowPositionCenter.horizontal) && handlerPositionCenter.horizontal - $(window).scrollLeft() <= PopupMenu.prototype.config.documentWidth - arrowPositionCenter.horizontal) {
+			console.log('top-right: arrow move');
+			setFrame('touchrightBottom');
+
 		//・右上
 		} else if ( handlerPositionCenter.horizontal - $(window).scrollLeft() > PopupMenu.prototype.config.documentWidth - (arrowPositionCenter.horizontal)) {
 			console.log('topright');
-			setFrame('bottom', 'limited');
+			setFrame('bottom');
 
 		}
 
 	//●イベントハンドラが画面天地中央(ポップアップを表示させたときに、ポップアップの上面と下面が「limitMargin」で設定した余白に接していない状態)：
-	} else if ( handlerPositionCenter.vertical - $(window).scrollTop() >= arrowPositionCenter.vertical && handlerPositionCenter.vertical - $(window).scrollTop() <= PopupMenu.prototype.config.documentHeight - arrowPositionCenter.vertical) {
+	} else if ( handlerPositionCenter.vertical - $(window).scrollTop() >= arrowPositionCenter.vertical && handlerPositionCenter.vertical <= (PopupMenu.prototype.config.documentHeight - PopupMenu.prototype.limitMargin) - (contentSize.height - arrowPositionCenter.vertical)) {
 
 		//・左
 		if ( (handlerPosition.left + handlerSize.width) - $(window).scrollLeft() < PopupMenu.prototype.limitMargin + arrowSize.width) {
 			console.log('middleleft');
-			setFrame('right', 'limited');
+			setFrame('right');
 
 		//・左右中央
 		} else if ( (handlerPosition.left + handlerSize.width) - $(window).scrollLeft() >= PopupMenu.prototype.limitMargin + arrowSize.width && handlerPosition.left - $(window).scrollLeft() <= PopupMenu.prototype.config.documentWidth - (PopupMenu.prototype.limitMargin + contentSize.width + arrowSize.width)) {
 			console.log('middlemiddle');
-			setFrame('right', 'limited');
+			setFrame('right');
 
 		//・右
 		} else if ( handlerPosition.left - $(window).scrollLeft() > PopupMenu.prototype.config.documentWidth - (PopupMenu.prototype.limitMargin + contentSize.width + arrowSize.width)) {
 			console.log('middleright');
-			setFrame('left', 'limited');
+			setFrame('left');
+		}
+
+	// ポップアップの下側面がlimitMarginで設定した余白の範囲に設置
+	} else if ( handlerPositionCenter.vertical - $(window).scrollLeft() > (PopupMenu.prototype.config.documentHeight - PopupMenu.prototype.limitMargin) - (contentSize.height - arrowPositionCenter.vertical) && handlerPositionCenter.vertical - $(window).scrollTop() <= PopupMenu.prototype.config.documentHeight - arrowPositionCenter.vertical) {
+		//・左
+		if ( (handlerPosition.left + handlerSize.width) - $(window).scrollLeft() < PopupMenu.prototype.limitMargin + arrowSize.width) {
+			console.log('middle-left: arrow move');
+			setFrame('touchbottomRight');
+
+		//・左右中央
+		} else if ( (handlerPosition.left + handlerSize.width) - $(window).scrollLeft() >= PopupMenu.prototype.limitMargin + arrowSize.width && handlerPosition.left - $(window).scrollLeft() <= PopupMenu.prototype.config.documentWidth - (PopupMenu.prototype.limitMargin + contentSize.width + arrowSize.width)) {
+			console.log('middle-middle: arrow move');
+			setFrame('touchbottomRight');
+
+		//・右
+		} else if ( handlerPosition.left - $(window).scrollLeft() > PopupMenu.prototype.config.documentWidth - (PopupMenu.prototype.limitMargin + contentSize.width + arrowSize.width)) {
+			console.log('middle-right: arrow move');
+			setFrame('touchbottomLeft');
 		}
 
 	//●イベントハンドラが画面下部(ポップアップを表示させたときに、ポップアップの下面が「limitMargin」で設定した余白に接した以後の状態)：
@@ -265,17 +352,22 @@ PopupMenu.prototype.getPosition = function () {
 		//・左下
 		if ( handlerPositionCenter.horizontal - $(window).scrollLeft() < arrowPositionCenter.horizontal) {
 			console.log('bottomleft');
-			setFrame('top', 'limited');
+			setFrame('top');
 
 		//・左右中央
-		} else if ( handlerPositionCenter.horizontal - $(window).scrollLeft() >= arrowPositionCenter.horizontal && handlerPositionCenter.horizontal - $(window).scrollLeft() <=  PopupMenu.prototype.config.documentWidth - arrowPositionCenter.horizontal) {
+		} else if ( handlerPositionCenter.horizontal - $(window).scrollLeft() >= arrowPositionCenter.horizontal && handlerPositionCenter.horizontal - $(window).scrollLeft() <= PopupMenu.prototype.config.documentWidth - (contentSize.width - arrowPositionCenter.horizontal)) {
 			console.log('bottommiddle');
-			setFrame('top', 'limited');
+			setFrame('top');
+
+		// ポップアップの右側面がlimitMarginで設定した余白の範囲に設置
+		} else if ( handlerPositionCenter.horizontal - $(window).scrollLeft() > PopupMenu.prototype.config.documentWidth - (contentSize.width - arrowPositionCenter.horizontal) && handlerPositionCenter.horizontal - $(window).scrollLeft() <=  PopupMenu.prototype.config.documentWidth - arrowPositionCenter.horizontal) {
+			console.log('bottom-right: arrow move');
+			setFrame('touchrightTop');
 
 		//・右下
 		} else if ( handlerPositionCenter.horizontal - $(window).scrollLeft() >  PopupMenu.prototype.config.documentWidth - arrowPositionCenter.horizontal) {
 			console.log('bottomright');
-			setFrame('top', 'limited');
+			setFrame('top');
 
 		}
 	}
@@ -283,19 +375,25 @@ PopupMenu.prototype.getPosition = function () {
 
 PopupMenu.prototype.run = function () {
 	$(this.handler).on('click', function () {
-		PopupMenu.prototype.init();
 		PopupMenu.prototype.mainProcess();
 	});
-	$(window).resize(function () {
-		// popupの位置調整
-	});
-	$(window).scroll(function () {
-		// popupの位置調整
-	});
+		$(window).resize(function () {
+			if (PopupMenu.prototype.actionFlg == true) {
+				// popupの位置調整
+			}
+		});
+		$(window).scroll (function () {
+			if (PopupMenu.prototype.actionFlg == true) {
+				// popupの位置調整
+				console.log('x:' + $(window).scrollLeft() + ', y:' + $(window).scrollTop());
+				// PopupMenu.prototype.init();
+			}
+		});
 
 }
 PopupMenu.prototype.mainProcess = function () {
 	if (PopupMenu.prototype.actionFlg == false) {
+		PopupMenu.prototype.init();
 		PopupMenu.prototype.open();
 	} else if (PopupMenu.prototype.actionFlg == true) {
 		PopupMenu.prototype.close();
@@ -377,6 +475,8 @@ var Constructor = function (handler, comment) {
 
 Constructor.prototype = {
 	content: '.test5_content'
+	,handler: 'test7'
+	,comment: 'hello7'
 	,flg: false
 	// 検証1：メンバ変数を読み込めるか
 	,test1: function () {
@@ -423,6 +523,11 @@ Constructor.prototype = {
 			console.log('this: ' + this);
 			console.log('this.handler: ' + this.handler);
 			console.log('this.comment: ' + this.comment);
+		});
+	}
+	,test7: function () {
+		$(window).scroll (function () {
+			console.log(Constructor.prototype.handler + ', ' + Constructor.prototype.comment);
 		});
 	}
 }

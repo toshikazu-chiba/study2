@@ -6,10 +6,11 @@
 		height: 300px;
 		& > .popup1 {
 			position: absolute;
-			top: 0;
-			// bottom: 0;
+			// top: 0;
+			bottom: 0;
+			// bottom: 120px;
 			// right: 0;			
-			right: 120px;			
+			right: 100px;			
 			// left: 0;
 			// left: 300px;
 			a {
