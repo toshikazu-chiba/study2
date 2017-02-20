@@ -132,7 +132,6 @@
 			position: absolute;
 			left: 300px;
 			z-index: $z_index_lv3;
-			background-color: $white;
 			& > .inner {
 				position: relative;
 				z-index: $base_z_index;
@@ -165,6 +164,7 @@
 					padding: 10px;
 					border-radius: 10px;
 					border: solid 1px $borderColor;
+					background-color: $white;
 				}
 			}
 			&.active {

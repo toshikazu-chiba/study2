@@ -4,7 +4,6 @@
 #popup_sample > .content > .popup1 {
   position: absolute;
   bottom: 0;
-  right: 100px;
 }
 #popup_sample > .content > .popup1 a {
   display: block;
